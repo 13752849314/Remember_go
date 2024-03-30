@@ -1,0 +1,16 @@
+dbConfig:
+  database: mysql
+  user: root
+  password: hg5200820
+  host: localhost
+  port: 3306
+  dbname: remember
+  charset: utf8mb4
+  parseTime: true
+  loc: Local
+
+  maxIdleConns: 5 # 最大空闲连接数
+  maxOpenConns: 10 # 最大打开连接数
+  coonMaxLifetime: 1 # 最长存活时间 （h）
+service:
+  port: 8890
