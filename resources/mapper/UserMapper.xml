@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="userMapper">
+    <select id="getUserByUsername" resultType="entity.User">
+        select * from users where username = ?
+    </select>
+    <select id="getUserByOpenId" resultType="entity.User">
+        select * from users where openId = ?
+    </select>
+    <select id="getAllUsers" resultType="entity.Users">
+        select * from users
+    </select>
+</mapper>

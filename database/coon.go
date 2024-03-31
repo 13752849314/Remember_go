@@ -14,7 +14,7 @@ var DB *gorm.DB
 func init() {
 	db, err := gorm.Open(config.Configure.DbConfig.Database, config.Configure.GetDbUrl())
 	if err != nil {
-		log.Println(err)
+		log.Println(err.Error())
 	}
 	DB = db
 	setPool(DB)
