@@ -40,7 +40,7 @@ func (c *Config) GetDbUrl() string {
 }
 
 func init() {
-	file, err := os.ReadFile("config.yml")
+	file, err := os.ReadFile("./resources/config.yml")
 	if err != nil {
 		log.Fatal(err)
 	} else if err = yaml.Unmarshal(file, &Configure); err != nil {
