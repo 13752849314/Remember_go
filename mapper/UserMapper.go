@@ -39,6 +39,12 @@ func (m *UserMapper) GetUserById(id int) *entity.User {
 	return user
 }
 
+func (m *UserMapper) GetUserByUsername(username string) *entity.User {
+	user := new(entity.User)
+	DBUser.First(user, "username= ? ", username)
+	return user
+}
+
 func (m *UserMapper) Select(funName string, where ...interface{}) interface{} {
 	s := UM[funName]
 	Sql := s.Sql

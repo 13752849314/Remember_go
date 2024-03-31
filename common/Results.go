@@ -30,3 +30,8 @@ func (r *Results) AddData(key string, value any) *Results {
 	r.Data[key] = value
 	return r
 }
+
+func (r *Results) SetMessage(message string) *Results {
+	r.Data["message"] = message
+	return r
+}

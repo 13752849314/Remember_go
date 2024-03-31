@@ -3,5 +3,7 @@ package service
 import "remember/entity"
 
 type UserService interface {
-	GetAllUsers() []entity.User
+	GetAllUsers() interface{}
+	Registration(user *entity.User) error
+	Login(user *entity.User) error
 }

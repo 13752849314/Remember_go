@@ -11,7 +11,7 @@ type User struct {
 	Password string     `gorm:"column:password" form:"password" json:"password"`
 	Phone    string     `gorm:"column:phone" form:"phone" json:"phone"`
 	Email    string     `gorm:"column:email" form:"email" json:"email"`
-	Birthday *time.Time `gorm:"column:birthday" form:"birthday" time_format:"2006-01-02" json:"birthday"`
+	Birthday *time.Time `gorm:"column:birthday" form:"birthday" time_format:"2006-01-02 15:04:05" json:"birthday"`
 	OpenId   string     `gorm:"column:openId" form:"openId" json:"openId"`
 	Roles    string     `gorm:"column:roles" form:"roles" json:"roles"`
 }
