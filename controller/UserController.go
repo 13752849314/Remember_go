@@ -13,6 +13,12 @@ func GetAllUsers(c *gin.Context) {
 	c.JSON(200, common.StatusOk().AddData("users", users))
 }
 
+func GetAllUser(c *gin.Context) {
+	us := impl.UserServiceImpl{}
+	users := us.GetAllUser()
+	c.JSON(200, common.StatusOk().AddData("users", users))
+}
+
 func Registration(c *gin.Context) {
 	us := impl.UserServiceImpl{}
 	user := new(entity.User)

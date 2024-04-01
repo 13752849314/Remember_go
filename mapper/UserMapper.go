@@ -33,6 +33,12 @@ func (m *UserMapper) Delete(user *entity.User) error {
 	return err
 }
 
+func (m *UserMapper) GetAllUser() []entity.User {
+	var users []entity.User
+	DBUser.Find(&users)
+	return users
+}
+
 func (m *UserMapper) GetUserById(id int) *entity.User {
 	user := new(entity.User)
 	DBUser.Find(user, id)

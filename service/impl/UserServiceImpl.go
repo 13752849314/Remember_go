@@ -11,6 +11,10 @@ type UserServiceImpl struct {
 	mapper mapper.UserMapper
 }
 
+func (u *UserServiceImpl) GetAllUser() []entity.User {
+	return u.mapper.GetAllUser()
+}
+
 func (u *UserServiceImpl) Login(user *entity.User) error {
 	userDb := u.mapper.GetUserByUsername(user.Username)
 	if userDb.ID == 0 {

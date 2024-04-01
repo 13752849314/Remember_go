@@ -8,8 +8,10 @@ import (
 func Remember() *gin.Engine {
 	r := gin.Default()
 	// todo 路由注册
-	r.GET("/", controller.GetAllUsers)
-	r.POST("/register", controller.Registration)
-	r.POST("/login", controller.Login)
+	userR := r.Group("/user")
+	userR.GET("/users", controller.GetAllUsers)
+	userR.GET("/user", controller.GetAllUser)
+	userR.POST("/register", controller.Registration)
+	userR.POST("/login", controller.Login)
 	return r
 }
