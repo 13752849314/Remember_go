@@ -43,11 +43,11 @@ func Login(c *gin.Context) {
 		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
 		return
 	}
-	err = us.Login(user)
+	var token string
+	token, err = us.Login(user)
 	if err != nil {
 		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
 		return
 	}
-	// todo jwt
-	c.JSON(200, common.StatusOk().SetMessage("登录成功").AddData("jwt", "12345"))
+	c.JSON(200, common.StatusOk().SetMessage("登录成功").AddData("jwt", token))
 }

@@ -15,16 +15,24 @@ func (u *UserServiceImpl) GetAllUser() []entity.User {
 	return u.mapper.GetAllUser()
 }
 
-func (u *UserServiceImpl) Login(user *entity.User) error {
+func (u *UserServiceImpl) Login(user *entity.User) (string, error) {
 	userDb := u.mapper.GetUserByUsername(user.Username)
 	if userDb.ID == 0 {
-		return errors.New("用户不存在")
+		return "", errors.New("用户不存在")
 	}
 	pass := utils.PasswordEncrypt(user.Password)
 	if pass != userDb.Password {
-		return errors.New("密码错误")
+		return "", errors.New("密码错误")
 	}
-	return nil
+	token, err := utils.CreatToken(userDb)
+	if err != nil {
+		return "", err
+	}
+	err = utils.AddInfo(userDb.Username, token)
+	if err != nil {
+		return "", err
+	}
+	return token, nil
 }
 
 func (u *UserServiceImpl) Registration(user *entity.User) (err error) {

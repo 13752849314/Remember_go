@@ -32,6 +32,11 @@ type Config struct {
 	Service struct {
 		Port int `yaml:"port"`
 	} `yaml:"service"`
+
+	Remember struct {
+		Key        string `yaml:"key"`
+		Developers string `yaml:"developers"`
+	} `yaml:"remember"`
 }
 
 func (c *Config) GetDbUrl() string {
