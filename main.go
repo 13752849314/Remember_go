@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/robfig/cron"
+	"log"
 	"remember/config"
 	"remember/job"
 	"remember/router"
@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello Remember_go!")
+	log.Println("Hello Remember_go!")
 	c := cron.New()
 	c = job.AddUserJob(c)
 	c.Start()
