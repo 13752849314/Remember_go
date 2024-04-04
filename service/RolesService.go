@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"remember/common"
+	"remember/mapper"
 	"remember/utils"
 )
 
@@ -24,7 +25,7 @@ func IsInJwtWhiteList(path string) bool {
 	return false
 }
 
-func JwtCheck() gin.HandlerFunc {
+func JwtCheck(role common.Role) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Println("JwtCheck")
 		s := c.Request.URL.String()
@@ -48,12 +49,17 @@ func JwtCheck() gin.HandlerFunc {
 			c.JSON(200, common.StatusErr().SetMessage("用户未登录或token过期"))
 			c.Abort()
 		}
+		if !RolesCheck(role, username) {
+			c.JSON(200, common.StatusErr().SetMessage("权限不够"))
+			c.Abort()
+		}
 		c.Next()
 	}
 }
 
-func RolesCheck() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Next()
-	}
+func RolesCheck(role common.Role, username string) bool {
+	log.Println("JwtCheck")
+	um := mapper.UserMapper{}
+	user := um.GetUserByUsername(username)
+	return role.Ge(common.ValueOf(user.Roles))
 }

@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"remember/common"
 	"remember/controller"
 	"remember/service"
 )
@@ -9,11 +10,14 @@ import (
 func Remember() *gin.Engine {
 	r := gin.Default()
 	// todo 路由注册
-	userR := r.Group("/user").Use(service.JwtCheck())
-	userR.GET("/users", controller.GetAllUsers)
-	userR.GET("/user", controller.GetAllUser)
-	userP := r.Group("/user")
-	userP.POST("/register", controller.Registration)
-	userP.POST("/login", controller.Login)
+	userRouterAdmins := r.Group("/user").Use(service.JwtCheck(common.Admins))
+	userRouterAdmins.GET("/users", controller.GetAllUsers)
+
+	userRouterAdmin := r.Group("/user").Use(service.JwtCheck(common.Admin))
+	userRouterAdmin.GET("/user", controller.GetAllUser)
+
+	userRouterUser := r.Group("/user")
+	userRouterUser.POST("/register", controller.Registration)
+	userRouterUser.POST("/login", controller.Login)
 	return r
 }
