@@ -25,7 +25,17 @@ func GetInfo(username string) string {
 	return login[username]
 }
 
-func DeleteInfo(username string) {
+func DeleteInfo(username, token string) error {
+	t := GetInfo(username)
+	if t == token {
+		delete(login, username)
+		return nil
+	} else {
+		return errors.New("用户已经退出")
+	}
+}
+
+func DeleteInfoByUsername(username string) {
 	delete(login, username)
 }
 

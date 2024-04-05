@@ -5,6 +5,7 @@ import (
 	"remember/common"
 	"remember/entity"
 	"remember/service/impl"
+	"remember/utils"
 )
 
 func GetAllUsers(c *gin.Context) {
@@ -50,4 +51,16 @@ func Login(c *gin.Context) {
 		return
 	}
 	c.JSON(200, common.StatusOk().SetMessage("登录成功").AddData("jwt", token))
+}
+
+func Logout(c *gin.Context) {
+	us := impl.UserServiceImpl{}
+	jjwt := c.Request.Header.Get("jwt")
+	claims, _ := utils.CheckToken(jjwt)
+	err := us.Logout(claims.Username, jjwt)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+		return
+	}
+	c.JSON(200, common.StatusOk().SetMessage("退出成功"))
 }
