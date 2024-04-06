@@ -71,6 +71,8 @@ func GetType(resultType string) reflect.Type {
 	TypeMapping := map[string]reflect.Type{
 		"entity.User":  reflect.TypeOf(entity.User{}),
 		"entity.Users": reflect.TypeOf([]entity.User{}),
+		"entity.Bill":  reflect.TypeOf(entity.Bill{}),
+		"entity.Bills": reflect.TypeOf([]entity.Bill{}),
 	}
 	return TypeMapping[resultType]
 }

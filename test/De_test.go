@@ -2,9 +2,12 @@ package test
 
 import (
 	"fmt"
+	"reflect"
+	"remember/common"
 	"remember/entity"
 	"remember/utils"
 	"testing"
+	"time"
 )
 
 func TestPasswordEncrypt(t *testing.T) {
@@ -35,4 +38,30 @@ func TestMap(t *testing.T) {
 	login["123"] = "123"
 	s := login["234"]
 	fmt.Println(s)
+}
+
+func TestStruct2Map(t *testing.T) {
+	c := new(common.ChangeUserP)
+	c.NewPassword = "123"
+	now := time.Now()
+	d := common.ChangeUserI{
+		Phone:    "111",
+		Birthday: &now,
+	}
+
+	struct2Map := utils.Struct2Map(c)
+	struct2Map1 := utils.Struct2Map(d)
+
+	fmt.Println(struct2Map)
+	fmt.Println(struct2Map1)
+
+	v := reflect.ValueOf(&d).Elem()
+	name := v.FieldByName("Email")
+	name.Set(reflect.ValueOf("1233333"))
+	fmt.Println(name)
+	time.Sleep(10 * time.Second)
+	n := time.Now()
+	v.FieldByName("Birthday").Set(reflect.ValueOf(&n))
+
+	fmt.Println(d)
 }

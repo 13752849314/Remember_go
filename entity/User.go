@@ -1,7 +1,9 @@
 package entity
 
 import (
+	"github.com/goccy/go-json"
 	"github.com/jinzhu/gorm"
+	"regexp"
 	"time"
 )
 
@@ -18,4 +20,16 @@ type User struct {
 
 func (u *User) TableName() string {
 	return "users"
+}
+
+func (u *User) Desensitization() *User {
+	bytes, _ := json.Marshal(u)
+	user := new(User)
+	_ = json.Unmarshal(bytes, user)
+	user.ID = 0
+	user.Password = ""
+	user.OpenId = ""
+	re, _ := regexp.Compile("(\\d{3})\\d{4}(\\d{4})")
+	user.Phone = re.ReplaceAllString(user.Phone, "$1****$2")
+	return user
 }

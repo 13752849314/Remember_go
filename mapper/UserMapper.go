@@ -7,56 +7,56 @@ import (
 	"remember/entity"
 )
 
-var DBUser *gorm.DB
-var UM map[string]Select
+var dbUser *gorm.DB
+var umUser map[string]Select
 
 type UserMapper struct {
 }
 
 func init() {
-	DBUser = database.GetCoon()
-	UM = GetMapper("userMapper")
+	dbUser = database.GetCoon()
+	umUser = GetMapper("userMapper")
 }
 
 func (m *UserMapper) Insert(user *entity.User) error {
-	err := DBUser.Create(user).Error
+	err := dbUser.Create(user).Error
 	return err
 }
 
 func (m *UserMapper) Update(user *entity.User) error {
-	err := DBUser.Update(user).Error
+	err := dbUser.Save(user).Error
 	return err
 }
 
 func (m *UserMapper) Delete(user *entity.User) error {
-	err := DBUser.Delete(user).Error
+	err := dbUser.Delete(user).Error
 	return err
 }
 
 func (m *UserMapper) GetAllUser() []entity.User {
 	var users []entity.User
-	DBUser.Find(&users)
+	dbUser.Find(&users)
 	return users
 }
 
 func (m *UserMapper) GetUserById(id int) *entity.User {
 	user := new(entity.User)
-	DBUser.Find(user, id)
+	dbUser.Find(user, id)
 	return user
 }
 
 func (m *UserMapper) GetUserByUsername(username string) *entity.User {
 	user := new(entity.User)
-	DBUser.First(user, "username= ? ", username)
+	dbUser.First(user, "username= ? ", username)
 	return user
 }
 
 func (m *UserMapper) Select(funName string, where ...interface{}) interface{} {
-	s := UM[funName]
+	s := umUser[funName]
 	Sql := s.Sql
 	reType := s.ResultType
 	Type := GetType(reType)
 	ret := reflect.New(Type).Interface()
-	DBUser.Raw(Sql, where...).Scan(ret)
+	dbUser.Raw(Sql, where...).Scan(ret)
 	return ret
 }

@@ -16,6 +16,10 @@ func UserRouter(r *gin.Engine) *gin.Engine {
 
 	userRouterUser := r.Group("/user").Use(service.JwtCheck(common.User))
 	userRouterUser.POST("/logout", controller.Logout)
+	userRouterUser.POST("/delete", controller.Delete)
+	userRouterUser.POST("/changeP", controller.ChangePassword)
+	userRouterUser.GET("/info", controller.GetUserInfo)
+	userRouterUser.POST("/changeI", controller.ChangeUserInfo)
 
 	userRouter := r.Group("/user")
 	userRouter.POST("/register", controller.Registration)

@@ -14,4 +14,10 @@ type UserService interface {
 	Logout(username, token string) error
 
 	Delete(controller, username string) error
+
+	ChangePassword(user *entity.User, token, OldPassword, NewPassword string) error
+
+	GetUserInfo(user *entity.User) *entity.User
+
+	ChangeUserInfo(user *entity.User, mp map[string]any) error
 }

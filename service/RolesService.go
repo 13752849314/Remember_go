@@ -52,7 +52,7 @@ func JwtCheck(role common.Role) gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		if !RolesCheck(role, username) {
+		if !RolesCheck(role, username, c) {
 			c.JSON(200, common.StatusErr().SetMessage("权限不够"))
 			c.Abort()
 			return
@@ -61,9 +61,10 @@ func JwtCheck(role common.Role) gin.HandlerFunc {
 	}
 }
 
-func RolesCheck(role common.Role, username string) bool {
+func RolesCheck(role common.Role, username string, c *gin.Context) bool {
 	log.Println("RolesCheck")
 	um := mapper.UserMapper{}
 	user := um.GetUserByUsername(username)
+	c.Set("user", user)
 	return role.Ge(common.ValueOf(user.Roles))
 }
