@@ -10,6 +10,7 @@ import (
 func BillRouter(r *gin.Engine) *gin.Engine {
 	BillRouterUser := r.Group("/bill").Use(service.JwtCheck(common.User))
 	BillRouterUser.POST("/add", controller.AddBill)
+	BillRouterUser.GET("/bill", controller.GetBillsByUsername)
 
 	return r
 }

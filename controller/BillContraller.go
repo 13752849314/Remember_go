@@ -13,6 +13,12 @@ func init() {
 	bs = new(impl.BillServiceImpl)
 }
 
+func GetBillsByUsername(c *gin.Context) {
+	user, _ := c.Get("user")
+	bills := bs.GetBillsByUsername(user.(entity.User).Username)
+	c.JSON(200, common.StatusOk().SetMessage("获取成功").AddData("bills", bills))
+}
+
 func AddBill(c *gin.Context) {
 	bill := new(entity.Bill)
 	err := c.ShouldBindJSON(bill)
