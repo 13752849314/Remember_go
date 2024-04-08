@@ -1,8 +1,8 @@
 dbConfig:
   database: mysql
   user: root
-  password: hg5200820
-  host: localhost
+  password: 123456
+  host: 192.168.1.109
   port: 3306
   dbname: remember
   charset: utf8mb4
@@ -16,7 +16,7 @@ dbConfig:
   path: resources
   matched: '*Mapper.xml'
 service:
-  port: 4090
+  port: 8890
 remember:
   key: happygh0st123456
   developers: AoOu

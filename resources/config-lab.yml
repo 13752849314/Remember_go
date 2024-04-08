@@ -19,3 +19,4 @@ service:
   port: 8890
 remember:
   key: happygh0st123456
+  developers: AoOu
