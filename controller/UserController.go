@@ -22,7 +22,7 @@ func GetAllUsers(c *gin.Context) {
 
 func GetAllUser(c *gin.Context) {
 	users := us.GetAllUser()
-	c.JSON(200, common.StatusOk().AddData("users", users))
+	c.JSON(200, common.StatusOk().AddData("user", users))
 }
 
 func Registration(c *gin.Context) {
