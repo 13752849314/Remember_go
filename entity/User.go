@@ -2,20 +2,22 @@ package entity
 
 import (
 	"github.com/goccy/go-json"
-	"github.com/jinzhu/gorm"
 	"regexp"
-	"time"
+	"remember/common"
 )
 
 type User struct {
-	gorm.Model
-	Username string     `gorm:"column:username;unique" form:"username" json:"username"`
-	Password string     `gorm:"column:password" form:"password" json:"password"`
-	Phone    string     `gorm:"column:phone" form:"phone" json:"phone"`
-	Email    string     `gorm:"column:email" form:"email" json:"email"`
-	Birthday *time.Time `gorm:"column:birthday" form:"birthday" time_format:"2006-01-02 15:04:05" json:"birthday"`
-	OpenId   string     `gorm:"column:openId" form:"openId" json:"openId"`
-	Roles    string     `gorm:"column:roles" form:"roles" json:"roles"`
+	ID        uint               `gorm:"primary_key;column:id" json:"id"`
+	CreatedAt common.MyDateTime  `gorm:"column:created_at" json:"created_at"`
+	UpdatedAt common.MyDateTime  `gorm:"column:updated_at" json:"updated_at"`
+	DeletedAt *common.MyDateTime `sql:"index" gorm:"column:deleted_at" json:"deleted_at"`
+	Username  string             `gorm:"column:username;unique" form:"username" json:"username"`
+	Password  string             `gorm:"column:password" form:"password" json:"password"`
+	Phone     string             `gorm:"column:phone" form:"phone" json:"phone"`
+	Email     string             `gorm:"column:email" form:"email" json:"email"`
+	Birthday  common.MyDate      `gorm:"column:birthday" form:"birthday" json:"birthday"`
+	OpenId    string             `gorm:"column:openId" form:"openId" json:"openId"`
+	Roles     string             `gorm:"column:roles" form:"roles" json:"roles"`
 }
 
 func (u *User) TableName() string {
