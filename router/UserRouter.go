@@ -13,6 +13,7 @@ func UserRouter(r *gin.Engine) *gin.Engine {
 
 	userRouterAdmin := r.Group("/user").Use(service.JwtCheck(common.Admin))
 	userRouterAdmin.GET("/user", controller.GetAllUser)
+	userRouterAdmin.POST("/add", controller.AddUser)
 
 	userRouterUser := r.Group("/user").Use(service.JwtCheck(common.User))
 	userRouterUser.POST("/logout", controller.Logout)

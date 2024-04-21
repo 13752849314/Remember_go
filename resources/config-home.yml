@@ -16,7 +16,7 @@ dbConfig:
   path: resources
   matched: '*Mapper.xml'
 service:
-  port: 8890
+  port: 4091
 remember:
   key: happygh0st123456
   developers: AoOu

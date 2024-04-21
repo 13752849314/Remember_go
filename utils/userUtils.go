@@ -2,7 +2,9 @@ package utils
 
 import (
 	"errors"
+	"github.com/gin-gonic/gin"
 	"log"
+	"remember/entity"
 )
 
 var login map[string]string
@@ -45,6 +47,11 @@ func GetKeys() []string {
 		keys = append(keys, key)
 	}
 	return keys
+}
+
+func GetUser(c *gin.Context) *entity.User {
+	user, _ := c.Get("user")
+	return user.(*entity.User)
 }
 
 func MaintainLogin() {

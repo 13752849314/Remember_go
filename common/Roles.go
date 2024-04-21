@@ -36,3 +36,10 @@ func ValueOf(name string) Role {
 	}
 	return User
 }
+
+func Ge(controller, controlled string) bool {
+	if ValueOf(controlled) == Admins {
+		return true
+	}
+	return ValueOf(controller) == Admin && ValueOf(controlled) == User
+}

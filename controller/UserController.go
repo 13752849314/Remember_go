@@ -17,12 +17,18 @@ func init() {
 
 func GetAllUsers(c *gin.Context) {
 	users := us.GetAllUsers()
-	c.JSON(200, common.StatusOk().AddData("users", users))
+	c.JSON(200, common.StatusOk().AddData("users", users).SetMessage("获取用户成功"))
 }
 
 func GetAllUser(c *gin.Context) {
-	users := us.GetAllUser()
-	c.JSON(200, common.StatusOk().AddData("user", users))
+	user := utils.GetUser(c)
+	var users []entity.User
+	if common.ValueOf(user.Roles) == common.Admins {
+		users = us.GetAllUsers().([]entity.User)
+	} else {
+		users = us.GetAllUser()
+	}
+	c.JSON(200, common.StatusOk().AddData("user", users).SetMessage("获取用户成功"))
 }
 
 func Registration(c *gin.Context) {
@@ -129,4 +135,25 @@ func ChangeUserInfo(c *gin.Context) {
 	}
 	log.Println("修改信息为：", mp)
 	c.JSON(200, common.StatusOk().SetMessage("信息修改成功"))
+}
+
+func AddUser(c *gin.Context) {
+	userC := utils.GetUser(c)
+	user := new(entity.User)
+	err := c.ShouldBindJSON(user)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+		return
+	}
+	if common.Ge(userC.Roles, user.Roles) {
+		err := us.AddUser(user)
+		if err != nil {
+			c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+			return
+		}
+		c.JSON(200, common.StatusOk().SetMessage("添加成功"))
+		log.Printf("新用户：%v添加成功\n", user.Username)
+	} else {
+		c.JSON(200, common.StatusErr().SetMessage("权限不够"))
+	}
 }

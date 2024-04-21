@@ -90,7 +90,9 @@ func (u *UserServiceImpl) Registration(user *entity.User) (err error) {
 		// 是新用户 存入数据库
 		// 将密码加密 SHA256
 		user.Password = utils.PasswordEncrypt(user.Password)
+		user.Roles = common.User.Name() // 通过注册的用户只能为 user
 		err := u.mapper.Insert(user)
+		log.Println("新用户：" + user.Username + "注册成功")
 		if err != nil {
 			return err
 		}
@@ -143,6 +145,15 @@ func (u *UserServiceImpl) ChangeUserInfo(user *entity.User, mp map[string]any) e
 		}
 	}
 	err := u.mapper.Update(user)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (u *UserServiceImpl) AddUser(user *entity.User) error {
+	user.Password = utils.PasswordEncrypt(user.Password)
+	err := u.mapper.Insert(user)
 	if err != nil {
 		return err
 	}
