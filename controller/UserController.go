@@ -7,6 +7,7 @@ import (
 	"remember/entity"
 	"remember/service/impl"
 	"remember/utils"
+	"strconv"
 )
 
 var us *impl.UserServiceImpl
@@ -22,9 +23,9 @@ func GetAllUsers(c *gin.Context) {
 
 func GetAllUser(c *gin.Context) {
 	user := utils.GetUser(c)
-	var users []entity.User
+	var users interface{}
 	if common.ValueOf(user.Roles) == common.Admins {
-		users = us.GetAllUsers().([]entity.User)
+		users = us.GetAllUsers()
 	} else {
 		users = us.GetAllUser()
 	}
@@ -129,6 +130,31 @@ func ChangeUserInfo(c *gin.Context) {
 	user, _ := c.Get("user")
 	mp := utils.Struct2Map(ci)
 	err = us.ChangeUserInfo(user.(*entity.User), mp)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+		return
+	}
+	log.Println("修改信息为：", mp)
+	c.JSON(200, common.StatusOk().SetMessage("信息修改成功"))
+}
+
+func ChangeUserInfoById(c *gin.Context) {
+	id := c.Param("id")
+	var err error
+	var idi int
+	idi, err = strconv.Atoi(id)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage("请求参数错误"))
+		return
+	}
+	ci := new(common.ChangeUserI)
+	err = c.ShouldBindJSON(ci)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+		return
+	}
+	mp := utils.Struct2Map(ci)
+	err = us.ChangeUserInfoById(idi, mp)
 	if err != nil {
 		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
 		return

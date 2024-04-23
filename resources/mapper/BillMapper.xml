@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namespace="BillMapper">
+<mapper namespace="billMapper">
     <select id="getBillsByUsername" resultType="entity.Bills">
         select * from `bills` where `username` = ? and `deleted_at` is NULL
     </select>

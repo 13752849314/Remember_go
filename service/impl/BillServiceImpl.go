@@ -1,6 +1,7 @@
 package impl
 
 import (
+	"errors"
 	"log"
 	"remember/entity"
 	"remember/mapper"
@@ -20,5 +21,14 @@ func (b *BillServiceImpl) AddBill(bill *entity.Bill) error {
 	if err == nil {
 		log.Println("账单添加：", bill)
 	}
+	return err
+}
+
+func (b *BillServiceImpl) DeleteBillById(id int) error {
+	bill, err := b.mapper.GetById(id)
+	if err != nil {
+		return errors.New("账单不存在")
+	}
+	err = b.mapper.Delete(bill)
 	return err
 }

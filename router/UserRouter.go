@@ -21,6 +21,7 @@ func UserRouter(r *gin.Engine) *gin.Engine {
 	userRouterUser.POST("/changeP", controller.ChangePassword)
 	userRouterUser.GET("/info", controller.GetUserInfo)
 	userRouterUser.POST("/changeI", controller.ChangeUserInfo)
+	userRouterUser.POST("/changeI/:id", controller.ChangeUserInfoById)
 
 	userRouter := r.Group("/user")
 	userRouter.POST("/register", controller.Registration)

@@ -151,6 +151,14 @@ func (u *UserServiceImpl) ChangeUserInfo(user *entity.User, mp map[string]any) e
 	return nil
 }
 
+func (u *UserServiceImpl) ChangeUserInfoById(id int, mp map[string]any) error {
+	user := u.mapper.GetUserById(id)
+	if user.ID == 0 {
+		return errors.New("用户不存在")
+	}
+	return u.ChangeUserInfo(user, mp)
+}
+
 func (u *UserServiceImpl) AddUser(user *entity.User) error {
 	user.Password = utils.PasswordEncrypt(user.Password)
 	err := u.mapper.Insert(user)

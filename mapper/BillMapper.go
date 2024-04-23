@@ -33,6 +33,12 @@ func (b *BillMapper) Delete(bill *entity.Bill) error {
 	return err
 }
 
+func (b *BillMapper) GetById(id int) (*entity.Bill, error) {
+	bill := new(entity.Bill)
+	err := dbBill.Find(bill, id).Error
+	return bill, err
+}
+
 func (b *BillMapper) Select(funName string, where ...interface{}) interface{} {
 	s := umBill[funName]
 	Sql := s.Sql

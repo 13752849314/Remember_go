@@ -21,5 +21,7 @@ type UserService interface {
 
 	ChangeUserInfo(user *entity.User, mp map[string]any) error
 
+	ChangeUserInfoById(id int, mp map[string]any) error
+
 	AddUser(user *entity.User) error
 }

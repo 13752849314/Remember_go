@@ -5,6 +5,7 @@ import (
 	"remember/common"
 	"remember/entity"
 	"remember/service/impl"
+	"strconv"
 )
 
 var bs *impl.BillServiceImpl
@@ -34,4 +35,19 @@ func AddBill(c *gin.Context) {
 		return
 	}
 	c.JSON(200, common.StatusOk().SetMessage("添加成功"))
+}
+
+func DeleteBillById(c *gin.Context) {
+	ids := c.Param("id")
+	id, err := strconv.Atoi(ids)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage("请求参数错误"))
+		return
+	}
+	err = bs.DeleteBillById(id)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+		return
+	}
+	c.JSON(200, common.StatusOk().SetMessage("删除成功"))
 }

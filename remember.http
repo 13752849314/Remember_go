@@ -1,0 +1,55 @@
+### 注册
+POST http://localhost:4091/user/register
+Content-Type: application/json
+
+{
+  "username": "happygh0st",
+  "password": "happygh0st",
+  "phone": "13752849314",
+  "email": "371575373@qq.com",
+  "birthday": "1999-06-02",
+  "roles": "admins"
+}
+
+### login
+POST http://localhost:4091/user/login
+Content-Type: application/json
+
+{
+  "username": "happygh0st",
+  "password": "happygh0st"
+}
+
+### 修改用户信息
+POST http://localhost:4091/user/changeI/3
+Content-Type: application/json
+jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM4NzMxMzcsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzODYyMzM3fQ.Ja6coj6NCrUhaD7p2rO7_9ud9GuAFv8vhopbEG9IYXM
+
+{
+  "phone": "13752849314",
+  "email": "333@33.com",
+  "birthday": "2000-08-20"
+}
+
+### 添加账单
+POST http://localhost:4091/bill/add
+Content-Type: application/json
+jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM4NzMxMzcsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzODYyMzM3fQ.Ja6coj6NCrUhaD7p2rO7_9ud9GuAFv8vhopbEG9IYXM
+
+{
+  "consumeType": 0,
+  "consumeMoney": 12.7,
+  "consumeTime": "2024-01-23 12:13:14",
+  "remark": "午饭"
+}
+
+### 获取当前用户所有账单
+GET http://localhost:4091/bill/bill
+Content-Type: application/json
+jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM4NzQ4MDAsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzODY0MDAwfQ.opCbU7UbmFingE-Yca-5OuEVrQVq3aTaZRckRi07zZQ
+
+
+### 获取用户
+GET http://localhost:4091/user/user
+Content-Type: application/json
+jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM4NzQzNTgsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzODYzNTU4fQ.6clhVnj5A7GVjEvSbrLPMDfTjim4mFDrJdRNaMs2LYA
