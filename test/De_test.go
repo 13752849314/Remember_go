@@ -46,7 +46,7 @@ func TestStruct2Map(t *testing.T) {
 	now := time.Now()
 	d := common.ChangeUserI{
 		Phone:    "111",
-		Birthday: &now,
+		Birthday: common.MyDate(now),
 	}
 
 	struct2Map := utils.Struct2Map(c)
@@ -64,4 +64,12 @@ func TestStruct2Map(t *testing.T) {
 	v.FieldByName("Birthday").Set(reflect.ValueOf(&n))
 
 	fmt.Println(d)
+}
+
+func TestFile(t *testing.T) {
+	s := utils.ListDir("../entity")
+	fmt.Println(s)
+	for _, info := range s {
+		fmt.Println(info.Name(), info.Size())
+	}
 }

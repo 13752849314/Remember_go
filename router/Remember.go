@@ -11,6 +11,7 @@ func Remember() *gin.Engine {
 
 	r = UserRouter(r)
 	r = BillRouter(r)
+	r = FileRouter(r)
 
 	return r
 }

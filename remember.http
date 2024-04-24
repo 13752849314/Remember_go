@@ -53,3 +53,20 @@ jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleH
 GET http://localhost:4091/user/user
 Content-Type: application/json
 jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM4NzQzNTgsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzODYzNTU4fQ.6clhVnj5A7GVjEvSbrLPMDfTjim4mFDrJdRNaMs2LYA
+
+
+### 上传文件
+POST http://localhost:4091/file/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM5NjI0NjcsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzOTUxNjY3fQ.APAGfe98lq_jbdiGQKAYi8IRmtO56d8Q1u3R9NijaPo
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="main.go"
+Content-Type: text/plain
+
+< main.go
+
+### 获取文件信息
+GET http://localhost:4091/file/list
+Content-Type: application/json
+jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM5NjU4NzgsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzOTU1MDc4fQ.zy96ioOoLEJXbrj0LjtR3oqoirkOb4Y0lmA7DiFvzcY

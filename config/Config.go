@@ -36,6 +36,7 @@ type Config struct {
 	Remember struct {
 		Key        string `yaml:"key"`
 		Developers string `yaml:"developers"`
+		FilePath   string `yaml:"filePath"`
 	} `yaml:"remember"`
 }
 
