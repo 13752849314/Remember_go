@@ -19,8 +19,9 @@ func init() {
 	DB = db
 	setPool(DB)
 	// todo 初始化表
-	DB.AutoMigrate(&entity.User{}) // 初始化用户表
-	DB.AutoMigrate(&entity.Bill{}) // 初始化账单表
+	DB.AutoMigrate(&entity.User{})          // 初始化用户表
+	DB.AutoMigrate(&entity.Bill{})          // 初始化账单表
+	DB.AutoMigrate(&entity.SystemMessage{}) // 初始化系统消息表
 }
 func GetCoon() *gorm.DB {
 	return DB

@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"log"
+	"net/url"
 	"path"
 	"remember/common"
 	"remember/config"
@@ -74,8 +75,8 @@ func Download(c *gin.Context) {
 	// 获取下载名
 	downName := strings.Split(filename, "-")[1]
 	c.Header("Content-Type", "application/octet-stream")
-	c.Header("Content-Disposition", "attachment; filename="+downName)
-	c.Header("Content-Transfer-Encoding", "binary")
+	c.Header("Content-Disposition", "attachment; filename="+url.QueryEscape(downName))
+	//c.Header("Content-Transfer-Encoding", "binary")
 	c.File(path.Join(source, filename))
 	log.Printf("用户：%s-下载%s成功\n", user.Username, filename)
 }
