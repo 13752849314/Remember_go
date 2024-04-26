@@ -12,6 +12,7 @@ func BillRouter(r *gin.Engine) *gin.Engine {
 	BillRouterUser.POST("/add", controller.AddBill)
 	BillRouterUser.GET("/bill", controller.GetBillsByUsername)
 	BillRouterUser.POST("/delete/:id", controller.DeleteBillById)
+	BillRouterUser.POST("/changeBI/:id", controller.ChangeBillInfoById)
 
 	return r
 }

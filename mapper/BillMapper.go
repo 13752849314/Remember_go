@@ -33,7 +33,7 @@ func (b *BillMapper) Delete(bill *entity.Bill) error {
 	return err
 }
 
-func (b *BillMapper) GetById(id int) (*entity.Bill, error) {
+func (b *BillMapper) GetBillById(id int) (*entity.Bill, error) {
 	bill := new(entity.Bill)
 	err := dbBill.Find(bill, id).Error
 	return bill, err

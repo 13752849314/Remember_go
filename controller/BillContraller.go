@@ -2,9 +2,11 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"remember/common"
 	"remember/entity"
 	"remember/service/impl"
+	"remember/utils"
 	"strconv"
 )
 
@@ -34,6 +36,7 @@ func AddBill(c *gin.Context) {
 		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
 		return
 	}
+	log.Printf("账单添加：%+v\n", bill)
 	c.JSON(200, common.StatusOk().SetMessage("添加成功"))
 }
 
@@ -49,5 +52,29 @@ func DeleteBillById(c *gin.Context) {
 		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
 		return
 	}
+	log.Printf("账单删除：id=%d\n", id)
 	c.JSON(200, common.StatusOk().SetMessage("删除成功"))
+}
+
+func ChangeBillInfoById(c *gin.Context) {
+	ids := c.Param("id")
+	id, err := strconv.Atoi(ids)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage("请求参数错误"))
+		return
+	}
+	bi := new(common.ChangeBillI)
+	err = c.ShouldBindJSON(bi)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+		return
+	}
+	mp := utils.Struct2Map(bi)
+	err = bs.ChangeBillInfoById(id, mp)
+	if err != nil {
+		c.JSON(200, common.StatusErr().SetMessage(err.Error()))
+		return
+	}
+	log.Println("修改信息为：", mp)
+	c.JSON(200, common.StatusOk().SetMessage("信息修改成功"))
 }
