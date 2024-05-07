@@ -69,10 +69,12 @@ func GetMapper(mapperName string) map[string]Select {
 
 func GetType(resultType string) reflect.Type {
 	TypeMapping := map[string]reflect.Type{
-		"entity.User":  reflect.TypeOf(entity.User{}),
-		"entity.Users": reflect.TypeOf([]entity.User{}),
-		"entity.Bill":  reflect.TypeOf(entity.Bill{}),
-		"entity.Bills": reflect.TypeOf([]entity.Bill{}),
+		"entity.User":           reflect.TypeOf(entity.User{}),
+		"entity.Users":          reflect.TypeOf([]entity.User{}),
+		"entity.Bill":           reflect.TypeOf(entity.Bill{}),
+		"entity.Bills":          reflect.TypeOf([]entity.Bill{}),
+		"entity.SystemMessage":  reflect.TypeOf(entity.SystemMessage{}),
+		"entity.SystemMessages": reflect.TypeOf([]entity.SystemMessage{}),
 	}
 	return TypeMapping[resultType]
 }

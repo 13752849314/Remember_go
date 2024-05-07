@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="systemMessageMapper">
+    <select id="getPublicMessages" resultType="entity.SystemMessages">
+        select * from `systemMessage`
+        where (`publish_time` is not null) and (`publish_time` <![CDATA[<=]]> now())
+        and (`deleted_at` is null)
+    </select>
+</mapper>

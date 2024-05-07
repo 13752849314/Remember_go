@@ -16,7 +16,8 @@ func init() {
 func AddInfo(username, token string) error {
 	s := login[username]
 	if s != "" {
-		return errors.New("用户已经登录，请勿重复登录")
+		login[username] = s
+		return errors.New("用户已经登录，请勿重复登录\n" + "token:" + s)
 	}
 	login[username] = token
 	log.Println("用户：", username, "成功登录")
