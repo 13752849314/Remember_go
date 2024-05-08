@@ -1,8 +1,8 @@
 dbConfig:
   database: mysql
   user: root
-  password: 123456
-  host: 192.168.1.102
+  password: hg5200820
+  host: localhost
   port: 3306
   dbname: remember
   charset: utf8mb4
@@ -20,4 +20,4 @@ service:
 remember:
   key: happygh0st123456
   developers: AoOu
-  filePath: G:\Remember\files\
+  filePath: E:\Remember\files\

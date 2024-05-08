@@ -70,3 +70,25 @@ Content-Type: text/plain
 GET http://localhost:4091/file/list
 Content-Type: application/json
 jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTM5NjU4NzgsImp0aSI6IjUiLCJpc3MiOiJBb091IiwibmJmIjoxNzEzOTU1MDc4fQ.zy96ioOoLEJXbrj0LjtR3oqoirkOb4Y0lmA7DiFvzcY
+
+
+### phone login
+POST http://10.38.21.219:4091/user/login
+Content-Type: application/json
+
+{
+  "username": "happygh0st",
+  "password": "happygh0st"
+}
+
+### phone addBill
+POST http://10.38.21.219:4091/bill/add
+Content-Type: application/json
+jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcHB5Z2gwc3QiLCJleHAiOjE3MTUxODI3MjAsImp0aSI6IjEiLCJpc3MiOiJBb091IiwibmJmIjoxNzE1MTcxOTIwfQ.9DRe3vkAuNPOxXkT3KyGpDExvqRvzhAaY4GarwJ_jmo
+
+{
+  "consumeType": 0,
+  "consumeMoney": 12.7,
+  "consumeTime": "2024-01-23 12:13:14",
+  "remark": "午饭"
+}
