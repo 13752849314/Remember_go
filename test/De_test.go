@@ -59,9 +59,9 @@ func TestStruct2Map(t *testing.T) {
 	name := v.FieldByName("Email")
 	name.Set(reflect.ValueOf("1233333"))
 	fmt.Println(name)
-	time.Sleep(10 * time.Second)
-	n := time.Now()
-	v.FieldByName("Birthday").Set(reflect.ValueOf(&n))
+	time.Sleep(1 * time.Second)
+	n := common.MyDate(time.Now())
+	v.FieldByName("Birthday").Set(reflect.ValueOf(n))
 
 	fmt.Println(d)
 }
